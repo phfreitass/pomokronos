@@ -2,15 +2,14 @@ import { PlayCircleIcon } from 'lucide-react';
 import { DefaultInput } from '../DefaultInput';
 import { Cycles } from '../Cycles';
 import { DefaultButton } from '../DefaultButton';
-import { useState } from 'react';
+import { useRef } from 'react';
 
 export function MainForm() {
-  const [taskName, setTaskName] = useState('');
+  const taskNameInput = useRef<HTMLInputElement>(null);
 
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    console.log('DEU CERTO', taskName);
+    console.log('DEU CERTO');
   }
 
   return (
@@ -21,8 +20,7 @@ export function MainForm() {
           id='meuInput'
           type='text'
           placeholder='Digite algo'
-          value={taskName}
-          onChange={e => setTaskName(e.target.value)}
+          ref={taskNameInput}
         />
       </div>
 
