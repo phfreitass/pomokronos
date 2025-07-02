@@ -24,6 +24,6 @@ dist-ssr
 *.sw?
 
 .continue
-
-
+.clinerules
+memory-bank
 
