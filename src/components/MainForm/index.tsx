@@ -50,7 +50,7 @@ export function MainForm() {
       startDate: Date.now(), // Timestamp atual
       completeDate: null, // Será preenchido quando concluído
       interruptDate: null, // Será preenchido se interrompido
-      duration: 1, // Duração padrão em minutos (ajustar conforme necessidade)
+      duration: state.config[nextCycleType], // Duração padrão em minutos (ajustar conforme necessidade)
       type: nextCycleType, // Tipo baseado no ciclo atual (trabalho/descanso)
     };
 
