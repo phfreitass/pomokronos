@@ -92,10 +92,13 @@ export function MainForm() {
       </div>
 
       {/* Componente de visualização dos ciclos */}
-      <div className='formRow'>
-        <Cycles />
-      </div>
+      {state.currentCycle > 0 && (
+        <div className='formRow'>
+          <Cycles />
+        </div>
+      )}
 
+      {/* Exibição do próximo ciclo e tempo restante */}
       {/* Botão de submissão com ícone */}
       <div className='formRow'>
         <DefaultButton icon={<PlayCircleIcon />} />
