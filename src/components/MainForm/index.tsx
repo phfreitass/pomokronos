@@ -10,6 +10,7 @@ import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 import type { TaskModel } from '../../models/TaskModel';
 
 // Utilitários para cálculo de ciclos Pomodoro
+import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCyclesType';
 
@@ -65,7 +66,7 @@ export function MainForm() {
         activeTask: newTask, // Define a nova tarefa como ativa
         currentCycle: nextCycle, // Avança para o próximo ciclo
         secondsRemaining, // Inicia a contagem regressiva
-        formattedSecondsRemaining: '00:00', // Placeholder (deve ser formatado)
+        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining), // Placeholder
         tasks: [...prevState.tasks, newTask], // Adiciona à lista de tarefas
       };
     });
