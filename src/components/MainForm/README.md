@@ -63,9 +63,27 @@ Esta função é o coração da criação de tarefas e segue os seguintes passos
     - `activeTask` recebe a nova tarefa.
     - `currentCycle` é incrementado.
     - `secondsRemaining` é iniciado com o total de segundos da tarefa.
+    - `formattedSecondsRemaining`: O tempo formatado (ex: "25:00") é calculado e
+      armazenado.
     - A nova tarefa é adicionada ao array `tasks`.
 
-### 4. Renderização do Formulário
+### 4. Interrupção de Tarefas (`handleInterruptTask`)
+
+Quando o usuário decide interromper uma tarefa em andamento, esta função é
+acionada:
+
+1.  **Atualização do Estado**: `setState` é chamado para reverter o estado da
+    aplicação:
+    - `activeTask` é definido como `null`, indicando que não há mais tarefa
+      ativa.
+    - `secondsRemaining` é zerado.
+    - `formattedSecondsRemaining` é resetado para "00:00".
+2.  **Registro da Interrupção**: A função percorre o array `tasks` e encontra a
+    tarefa que estava ativa. Nela, a propriedade `interruptDate` é preenchida
+    com o timestamp atual, registrando o momento exato da interrupção. Isso é
+    crucial para o histórico e para futuras análises de produtividade.
+
+### 5. Renderização do Formulário
 
 - O formulário é renderizado com a classe `form` e o handler
   `handleCreateNewTask` no `onSubmit`.
@@ -76,15 +94,15 @@ Esta função é o coração da criação de tarefas e segue os seguintes passos
 - **Visualização de Ciclos**: O componente `Cycles` só aparece após o primeiro
   ciclo ser concluído (`state.currentCycle > 0`).
 - **Botões de Ação**:
-  - Se não houver tarefa ativa (`!state.activeTask`), o botão "Iniciar"
-    (`PlayCircleIcon`) é renderizado com `type="submit"`.
-  - Se houver uma tarefa ativa (`state.activeTask`), o botão "Interromper"
-    (`StopCircleIcon`) é renderizado.
+  - **Iniciar**: Se não houver tarefa ativa (`!state.activeTask`), o botão
+    "Iniciar" (`PlayCircleIcon`) é renderizado com `type="submit"`. Ao ser
+    clicado, ele submete o formulário e dispara `handleCreateNewTask`.
+  - **Interromper**: Se houver uma tarefa ativa (`state.activeTask`), o botão
+    "Interromper" (`StopCircleIcon`) é renderizado. Ele agora possui um
+    `onClick` que aciona a função `handleInterruptTask`, garantindo que a tarefa
+    seja interrompida corretamente.
 
 ## Pontos de Atenção
 
-- **Lógica de Interrupção**: O botão "Interromper" atualmente não possui uma
-  função associada ao `onClick`. A implementação da função `handleInterruptTask`
-  é necessária para que a interrupção de tarefas funcione corretamente.
 - **Placeholder**: A seção com "Lorem ipsum" é um conteúdo temporário e precisa
   ser substituída pela funcionalidade ou componente apropriado.
